@@ -8,13 +8,21 @@ function App() {
 		counter: null,
 	});
 
-	const handleSubmit = (player) => {
+	const handleChange = (player) => {
 		setState({ ...state, player: player });
+	};
+
+	const startTrivia = () => {
+		console.log('Begin');
 	};
 
 	return (
 		<div className="App">
-			<StartGame player={state.player} onChange={handleSubmit} />
+			<StartGame
+				player={state.player}
+				onChange={handleChange}
+				onSubmit={startTrivia}
+			/>
 		</div>
 	);
 }
