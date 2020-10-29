@@ -1,8 +1,6 @@
 import React from 'react';
 
 const StartGame = ({ player, onChange, onSubmit }) => {
-	// const [name, setName] = useState('');
-
 	const handleChange = (e) => {
 		onChange(e.target.value);
 	};

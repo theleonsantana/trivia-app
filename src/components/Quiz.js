@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Quiz = () => {
+const Quiz = ({ question }) => {
 	return (
 		<div>
 			<h3>Question</h3>
@@ -10,7 +10,7 @@ const Quiz = () => {
 				<li>item 3</li>
 				<li>item 4</li>
 			</ul>
-			<button>Check Answer</button>
+			<button>Next Question</button>
 		</div>
 	);
 };
