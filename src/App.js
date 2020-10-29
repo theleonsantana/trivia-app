@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Quiz from './components/Quiz';
 import StartGame from './components/StartGame';
 import './scss/App.scss';
 
@@ -6,6 +7,7 @@ function App() {
 	const [state, setState] = useState({
 		player: '',
 		counter: null,
+		begin: false,
 	});
 
 	const handleChange = (player) => {
@@ -13,16 +15,20 @@ function App() {
 	};
 
 	const startTrivia = () => {
-		console.log('Begin');
+		setState({ ...state, begin: true });
 	};
 
 	return (
 		<div className="App">
-			<StartGame
-				player={state.player}
-				onChange={handleChange}
-				onSubmit={startTrivia}
-			/>
+			{state.begin ? (
+				<Quiz />
+			) : (
+				<StartGame
+					player={state.player}
+					onChange={handleChange}
+					onSubmit={startTrivia}
+				/>
+			)}
 		</div>
 	);
 }

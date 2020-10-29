@@ -19,9 +19,9 @@ const StartGame = ({ player, onChange, onSubmit }) => {
 				<input
 					value={player}
 					onChange={handleChange}
-					placeholder="First name"
+					placeholder="Player Name"
 					type="text"
-					name="firstName"
+					name="player-name"
 					required
 				/>
 				<button type="submit">Submit</button>
