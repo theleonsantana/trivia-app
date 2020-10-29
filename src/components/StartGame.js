@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 
-const StartGame = () => {
-	const [name, setName] = useState('');
+const StartGame = ({ player, onChange }) => {
+	// const [name, setName] = useState('');
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleChange = (e) => {
+		onChange(e.target.value);
 	};
 
 	return (
 		<div>
 			<h2>Welcome to Tandem for 400!</h2>
 			<p>Please provide your name:</p>
-			<form action="" onSubmit={handleSubmit}>
+			<form action="" onSubmit={(e) => e.preventDefault()}>
 				<input
-					value={name}
-					onChange={(e) => {
-						setName(e.target.value);
-					}}
+					value={player}
+					onChange={handleChange}
 					placeholder="First name"
 					type="text"
 					name="firstName"
