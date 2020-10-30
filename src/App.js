@@ -10,6 +10,7 @@ function App() {
 		player: '',
 		counter: null,
 		begin: false,
+		selection: '',
 	});
 	const [question, setQuestion] = useState({
 		question: '',
@@ -60,10 +61,21 @@ function App() {
 		return sourceArray;
 	};
 
+	const handleSelection = (selection) => {
+		setState({ ...state, selection: selection });
+	};
+
+	const handleCheck = () => {};
+
 	return (
 		<div className="App">
 			{state.begin ? (
-				<Quiz question={question.question} options={question.options} />
+				<Quiz
+					question={question.question}
+					options={question.options}
+					check={handleCheck}
+					select={handleSelection}
+				/>
 			) : (
 				<StartGame
 					player={state.player}

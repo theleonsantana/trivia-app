@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Quiz = ({ question, options }) => {
+const Quiz = ({ question, options, check, select }) => {
+	// const [selected, setSelected] = useState(false);
+
+	const handleSelection = (e) => {
+		select(e.target.value);
+		e.target.className = '';
+		e.target.className = 'selected';
+	};
+
+	const handleCheck = () => {
+		console.log('checking response');
+	};
+
 	return (
 		<div>
-			<h3>{question}</h3>
-			<ul>
+			<div>
+				<h3>{question}</h3>
 				{options.map((item, i) => (
-					<li key={i}>{item}</li>
+					<button onClick={handleSelection} key={i} value={item}>
+						{item}
+					</button>
 				))}
-			</ul>
-			<button>Check Answer</button>
+			</div>
+			<button onClick={handleCheck}>Check Answer</button>
 		</div>
 	);
 };
