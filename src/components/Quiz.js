@@ -1,16 +1,15 @@
 import React from 'react';
 
-const Quiz = () => {
+const Quiz = ({ question, options }) => {
 	return (
 		<div>
-			<h3>Question</h3>
+			<h3>{question}</h3>
 			<ul>
-				<li>item 1</li>
-				<li>item 2</li>
-				<li>item 3</li>
-				<li>item 4</li>
+				{options.map((item, i) => (
+					<li key={i}>{item}</li>
+				))}
 			</ul>
-			<button>Next Question</button>
+			<button>Check Answer</button>
 		</div>
 	);
 };

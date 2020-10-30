@@ -13,7 +13,7 @@ function App() {
 	});
 	const [question, setQuestion] = useState({
 		question: '',
-		options: [],
+		options: {},
 		correct: '',
 	});
 	// const [options, setOptions] = useState({ answers: [] });
@@ -63,7 +63,7 @@ function App() {
 	return (
 		<div className="App">
 			{state.begin ? (
-				<Quiz />
+				<Quiz question={question.question} options={question.options} />
 			) : (
 				<StartGame
 					player={state.player}
