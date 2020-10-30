@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 const Quiz = ({ question, options, check, select }) => {
-	// const [selected, setSelected] = useState(false);
+	const [activeItem, setActiveItem] = useState(-1);
 
-	const handleSelection = (e) => {
+	const handleSelection = (e, i) => {
 		select(e.target.value);
-		e.target.className = '';
-		e.target.className = 'selected';
+		setActiveItem(i);
+		// console.log(e);
 	};
 
 	const handleCheck = () => {
@@ -18,7 +18,12 @@ const Quiz = ({ question, options, check, select }) => {
 			<div>
 				<h3>{question}</h3>
 				{options.map((item, i) => (
-					<button onClick={handleSelection} key={i} value={item}>
+					<button
+						onClick={(e) => handleSelection(e, i)}
+						key={i}
+						value={item}
+						className={activeItem === i ? 'active' : 'inactive'}
+					>
 						{item}
 					</button>
 				))}
