@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Quiz = ({ question }) => {
+const Quiz = () => {
 	return (
 		<div>
 			<h3>Question</h3>

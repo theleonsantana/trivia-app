@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import Quiz from './components/Quiz';
 import StartGame from './components/StartGame';
 import './scss/App.scss';
@@ -12,8 +11,12 @@ function App() {
 		counter: null,
 		begin: false,
 	});
-	const [question, setQuestion] = useState('');
-	const [options, setOptions] = useState({ options: [] });
+	const [question, setQuestion] = useState({
+		question: '',
+		options: [],
+		correct: '',
+	});
+	// const [options, setOptions] = useState({ answers: [] });
 
 	const handleChange = (player) => {
 		setState({ ...state, player: player });
@@ -25,24 +28,37 @@ function App() {
 	};
 
 	const getQuestion = () => {
-		// create a copy of the array data
-		let tempArray = triviaData;
-		// crate a random number by the length of the array
-		let randomQuestion = Math.floor(Math.random() * tempArray.length);
+		// randomize the questions
+		let shuffledTrivia = shuffle(triviaData);
+		let allOptions = [];
 
-		setQuestion(tempArray[randomQuestion].question);
-		tempArray.splice(randomQuestion, 1);
+		allOptions.push(shuffledTrivia[0].correct);
+		let incorrect = shuffledTrivia[0].incorrect;
+		for (let i = 0; i < incorrect.length; i++) {
+			allOptions.push(incorrect[i]);
+		}
 
-		console.log(tempArray);
-		/**
-		 * I need to iterate through the data
-		 * I need to assign question to state
-		 * I need to removed assigned questions from the current array
-		 *
-		 */
+		setState({ ...state, counter: state.counter++ });
+		setQuestion({
+			...question,
+			question: shuffledTrivia[0].question,
+			options: shuffle(allOptions),
+			correct: shuffledTrivia[0].correct,
+		});
+
+		shuffledTrivia.splice(0, 1);
+		console.log(shuffledTrivia);
 	};
 
-	// console.log(getQuestion());
+	const shuffle = (sourceArray) => {
+		for (var i = 0; i < sourceArray.length - 1; i++) {
+			var j = i + Math.floor(Math.random() * (sourceArray.length - i));
+			var temp = sourceArray[j];
+			sourceArray[j] = sourceArray[i];
+			sourceArray[i] = temp;
+		}
+		return sourceArray;
+	};
 
 	return (
 		<div className="App">
