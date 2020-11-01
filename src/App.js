@@ -11,13 +11,13 @@ function App() {
 		counter: null,
 		begin: false,
 		selection: '',
+		score: 0,
 	});
 	const [question, setQuestion] = useState({
 		question: '',
 		options: {},
 		correct: '',
 	});
-	// const [options, setOptions] = useState({ answers: [] });
 
 	const handleChange = (player) => {
 		setState({ ...state, player: player });
@@ -65,7 +65,10 @@ function App() {
 		setState({ ...state, selection: selection });
 	};
 
-	const handleCheck = () => {};
+	const handleCheck = (score) => {
+		// getQuestion();
+		setState({ ...state, score: +1 });
+	};
 
 	return (
 		<div className="App">
@@ -75,6 +78,8 @@ function App() {
 					options={question.options}
 					check={handleCheck}
 					select={handleSelection}
+					selection={state.selection}
+					correct={question.correct}
 				/>
 			) : (
 				<StartGame
