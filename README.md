@@ -7,6 +7,8 @@ Hi! my name is Leonardo Santana and this is my submition for Tandem!
 To run the application; clone the repo to your local enviroment.
 I am currently using `create-react-app` to make this application.
 
+Use these commands to run the application locally
+
 ### `yarn install`
 
 ### `yarn start`
@@ -32,3 +34,4 @@ You will also see any lint errors in the console.
 - Improve styling
 - Implement testing with Jest, which comes included with `create-react-app`
 - Improve documentation
+- Improve the styling in the selection and the checking of the right question
