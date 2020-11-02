@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 
-const Quiz = ({ question, options, check, select, selection, correct }) => {
+const Quiz = ({
+	question,
+	options,
+	select,
+	selection,
+	correct,
+	player,
+	counter,
+	check,
+	delay,
+}) => {
 	const [activeItem, setActiveItem] = useState(-1);
 	const [submit, setSubmit] = useState(null);
 
@@ -9,18 +19,31 @@ const Quiz = ({ question, options, check, select, selection, correct }) => {
 		setActiveItem(i);
 	};
 
-	const handleCheck = (score) => {
+	const ckeckAnswer = () => {
 		if (selection === correct) {
 			setSubmit(true);
-			check(score++);
-		} else {
+			setTimeout(() => {
+				setActiveItem(-1);
+			}, delay);
+			check();
+		} else if (selection !== correct) {
 			setSubmit(false);
+			check();
+			setActiveItem(-1);
+		} else {
+			check();
+			setActiveItem(-1);
 		}
+		setTimeout(() => {
+			setSubmit(null);
+		}, delay);
 	};
 
 	return (
 		<div>
 			<div>
+				<h4>Player: {player}</h4>
+				<h4>Question: {counter} / 10</h4>
 				<h3>{question}</h3>
 				{options.map((item, i) => (
 					<button
@@ -35,7 +58,7 @@ const Quiz = ({ question, options, check, select, selection, correct }) => {
 			</div>
 			{submit === true ? (
 				<h3>Correct :D</h3>
-			) : submit == null ? (
+			) : submit === null ? (
 				<h3>Check your answer</h3>
 			) : (
 				<div>
@@ -45,7 +68,9 @@ const Quiz = ({ question, options, check, select, selection, correct }) => {
 					</p>
 				</div>
 			)}
-			<button onClick={handleCheck}>Check Answer</button>
+			<button onClick={ckeckAnswer} disabled={!selection ? true : false}>
+				Check Answer
+			</button>
 		</div>
 	);
 };

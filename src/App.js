@@ -12,6 +12,7 @@ function App() {
 		begin: false,
 		selection: '',
 		score: 0,
+		delayTime: 5000,
 	});
 	const [question, setQuestion] = useState({
 		question: '',
@@ -38,7 +39,6 @@ function App() {
 		for (let i = 0; i < incorrect.length; i++) {
 			allOptions.push(incorrect[i]);
 		}
-
 		setState({ ...state, counter: state.counter++ });
 		setQuestion({
 			...question,
@@ -48,7 +48,7 @@ function App() {
 		});
 
 		shuffledTrivia.splice(0, 1);
-		console.log(shuffledTrivia);
+		// console.log(shuffledTrivia);
 	};
 
 	const shuffle = (sourceArray) => {
@@ -65,9 +65,18 @@ function App() {
 		setState({ ...state, selection: selection });
 	};
 
-	const handleCheck = (score) => {
-		// getQuestion();
-		setState({ ...state, score: +1 });
+	const handleCheck = () => {
+		setTimeout(() => {
+			getQuestion();
+			if (state.selection === question.correct) {
+				setState({ ...state, score: state.score++ });
+			}
+			setState({
+				...state,
+				counter: state.counter++,
+				selection: '',
+			});
+		}, state.delayTime);
 	};
 
 	return (
@@ -80,6 +89,9 @@ function App() {
 					select={handleSelection}
 					selection={state.selection}
 					correct={question.correct}
+					player={state.player}
+					counter={state.counter}
+					delay={state.delayTime}
 				/>
 			) : (
 				<StartGame
