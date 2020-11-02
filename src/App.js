@@ -9,7 +9,7 @@ import triviaData from './data/Apprentice_TandemFor400_Data.json';
 function App() {
 	const [state, setState] = useState({
 		player: '',
-		counter: 9,
+		counter: 0,
 		begin: false,
 		selection: '',
 		score: 0,
