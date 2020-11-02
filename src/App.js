@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Quiz from './components/Quiz';
+import Score from './components/Score';
 import StartGame from './components/StartGame';
 import './scss/App.scss';
 
@@ -8,17 +9,23 @@ import triviaData from './data/Apprentice_TandemFor400_Data.json';
 function App() {
 	const [state, setState] = useState({
 		player: '',
-		counter: null,
+		counter: 9,
 		begin: false,
 		selection: '',
 		score: 0,
-		delayTime: 5000,
+		delayTime: 2000,
 	});
 	const [question, setQuestion] = useState({
 		question: '',
 		options: {},
 		correct: '',
 	});
+
+	const initialQuestion = {
+		question: '',
+		options: {},
+		correct: '',
+	};
 
 	const handleChange = (player) => {
 		setState({ ...state, player: player });
@@ -66,22 +73,30 @@ function App() {
 	};
 
 	const handleCheck = () => {
-		setTimeout(() => {
-			getQuestion();
-			if (state.selection === question.correct) {
-				setState({ ...state, score: state.score++ });
-			}
-			setState({
-				...state,
-				counter: state.counter++,
-				selection: '',
-			});
-		}, state.delayTime);
+		if (state.counter !== 11) {
+			setTimeout(() => {
+				getQuestion();
+				if (state.selection === question.correct) {
+					setState({ ...state, score: state.score++ });
+				}
+
+				setState({
+					...state,
+					counter: state.counter++,
+					selection: '',
+				});
+			}, state.delayTime);
+		} else {
+			setQuestion({ ...initialQuestion });
+			setState({ ...state, begin: false });
+		}
 	};
 
 	return (
 		<div className="App">
-			{state.begin ? (
+			{state.counter === 11 ? (
+				<Score score={state.score} player={state.player} />
+			) : state.begin ? (
 				<Quiz
 					question={question.question}
 					options={question.options}

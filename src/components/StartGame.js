@@ -12,6 +12,8 @@ const StartGame = ({ player, onChange, onSubmit }) => {
 	return (
 		<div>
 			<h2>Welcome to Tandem for 400!</h2>
+			<p>10 questions per round</p>
+			<p>Results will be shown at the end of each round</p>
 			<p>Please provide your name:</p>
 			<form action="" onSubmit={handleSubmit}>
 				<input
@@ -22,7 +24,9 @@ const StartGame = ({ player, onChange, onSubmit }) => {
 					name="player-name"
 					required
 				/>
-				<button type="submit">Submit</button>
+				<button style={{ marginLeft: 20 }} type="submit">
+					Submit
+				</button>
 			</form>
 		</div>
 	);

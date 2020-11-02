@@ -1,7 +1,36 @@
+body {
+	background-color: #1a3a3a;
+}
+
 .App {
 	text-align: center;
+	color: #4f517d;
+	background-color: #dccfec;
+	width: 80%;
+	margin: 0 auto;
+	padding: 30px;
+	margin-top: 40px;
+}
+
+.correct {
+	color: greenyellow;
+}
+
+.incorrect {
+	color: red;
+}
+
+.options {
+	margin: 5px;
+	padding: 10px;
+	font-size: 3em;
 }
 
 .active {
-	background-color: aqua;
+	background-color: #a997df;
+	color: purple;
+}
+
+.inactive {
+	background-color: white;
 }
